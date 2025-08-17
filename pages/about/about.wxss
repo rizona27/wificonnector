@@ -1,0 +1,119 @@
+/* pages/about/about.wxss */
+.page-container {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* 自定义导航栏样式 */
+.custom-nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.nav-bar-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* 内容包裹容器，用于向下推开内容 */
+.content-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 增加顶部外边距，将文字部分向下推 */
+    margin-top: 150px; 
+}
+
+/* 之前的内容样式保持不变，但要确保它们位于 .content-wrapper 内 */
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    padding-top: 0;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.moving-gradient {
+    background-size: 800% 800%; /* 扩大渐变背景尺寸，实现更平滑的流动 */
+    animation: gradientFlow 20s ease-in-out infinite; /* 绑定动画，20秒为一个循环，速度更慢更平滑 */
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.text-line {
+    margin-bottom: 11px;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.logo-image {
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+}
+
+.time-container {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.time-text {
+    font-size: 15px;
+    font-weight: 100;
+    font-style: italic;
+    color: #D8DBE0; /* 更白的颜色 */
+}
+
+/* 新增：时间流逝特效 */
+.time-text-effect {
+    animation: timeFade 3s ease-in-out infinite;
+}
+
+@keyframes timeFade {
+  0% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}

@@ -1,0 +1,53 @@
+{
+    "description": "项目配置文件",
+    "packOptions": {
+        "ignore": [],
+        "include": []
+    },
+    "setting": {
+        "urlCheck": true,
+        "es6": true,
+        "postcss": true,
+        "preloadBackgroundData": false,
+        "minified": true,
+        "newFeature": true,
+        "autoAudits": false,
+        "coverView": true,
+        "showShadowRootInWxmlPanel": true,
+        "scopeDataCheck": false,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "packNpmRelationList": []
+    },
+    "compileType": "miniprogram",
+    "libVersion": "3.6.4",
+    "appid": "wx826845fe8f567d73",
+    "projectname": "wificonnector",
+    "simulatorType": "wechat",
+    "simulatorPluginLibVersion": {},
+    "condition": {
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "参数测试",
+                    "pathName": "pages/connect/connect",
+                    "query": "ssid=your_ssid&bssid=your_bssid&password=your_password",
+                    "scene": null
+                },
+                {
+                    "name": "成功跳转",
+                    "pathName": "pages/success/success",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    },
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
+    }
+}

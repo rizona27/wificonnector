@@ -1,0 +1,18 @@
+<view class="page-container">
+    <image src="/images/bg1.jpg" mode="aspectFill" class="background-image"></image>
+
+    <view class="custom-nav-bar" style="height: {{navBarHeight}}px;">
+        <text class="nav-bar-title" style="top: {{navBarTitleTop}}px;">Wifi随心享</text>
+    </view>
+
+    <view class="content-wrapper" style="padding-top: {{navBarHeight}}px;">
+        <view class="button-and-text-container">
+            <view class="ui-element ssid-container">
+                <view class="ssid-text-wrapper">
+                    <text style="font-style: italic; color: #ffffff;">SSID：{{ssid}}</text>
+                </view>
+            </view>
+            <button bindtap="connectWifi" class="ui-element">点击连接</button>
+        </view>
+    </view>
+</view>

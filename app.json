@@ -1,0 +1,32 @@
+{
+    "pages": [
+      "pages/connect/connect",
+      "pages/success/success",
+      "pages/about/about"
+    ],
+    "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#fff",
+      "navigationBarTitleText": "Wifi随心享",
+      "navigationBarTextStyle": "black"
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "tabBar": {
+      "list": [
+        {
+          "pagePath": "pages/connect/connect",
+          "text": "海内存知己",
+          "iconPath": "/icons/connect_icon.png",
+          "selectedIconPath": "/icons/connect_icon_selected.png"
+        },
+        {
+          "pagePath": "pages/about/about",
+          "text": "天涯若比邻",
+          "iconPath": "/icons/about_icon.png",
+          "selectedIconPath": "/icons/about_icon_selected.png"
+        }
+      ]
+    }
+  }
+  

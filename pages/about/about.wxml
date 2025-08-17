@@ -1,0 +1,24 @@
+<view class="page-container">
+    <image src="/images/bg.jpg" mode="aspectFill" class="background-image"></image>
+
+    <view class="custom-nav-bar" style="height: {{navBarHeight}}px;">
+        <text class="nav-bar-title" style="top: {{navBarTitleTop}}px;">Wifi随心享</text>
+    </view>
+    
+    <view class="content-wrapper">
+       <view class="text-container moving-gradient" style="background-image: linear-gradient(to bottom right, {{lineColors[0]}}, {{lineColors[1]}}, {{lineColors[2]}}, {{lineColors[3]}}, {{lineColors[4]}}, {{lineColors[5]}}, {{lineColors[6]}}, {{lineColors[7]}}); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+        <text class="text-line">微信扫一扫连Wifi的懒人工具</text>
+        <text class="text-line">希望方便到更多的朋友们；</text>
+        <text class="text-line">感谢生命中所有的遇见。</text>
+        <text class="text-line">--rizona.cn@gmail.com</text>
+        <text class="text-line">Happiness Around The Corner...</text>
+    </view>
+    <view class="image-container">
+        <image src="/images/C.gif" class="logo-image"></image>
+        <image src="/images/r.gif" class="logo-image"></image>
+    </view>
+    <view class="time-container">
+        <text class="time-text time-text-effect">{{currentTime}}</text>
+    </view>
+    </view>
+</view>

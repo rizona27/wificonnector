@@ -1,0 +1,7 @@
+{
+  "desc": "Nonthing is impossible",
+  "rules": [{
+  "action": "allow",
+  "page": "*"
+  }]
+}

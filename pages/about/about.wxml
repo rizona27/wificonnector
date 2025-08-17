@@ -14,10 +14,11 @@
         <text class="text-line">Happiness Around The Corner...</text>
     </view>
     <view class="image-container">
-        <image src="/images/C.gif" class="logo-image"></image>
+        <image src="/images/c.gif" class="logo-image"></image>
         <image src="/images/r.gif" class="logo-image"></image>
     </view>
     <view class="time-container">
+        <text class="time-text">{{currentDate}}</text>
         <text class="time-text time-text-effect">{{currentTime}}</text>
     </view>
     </view>

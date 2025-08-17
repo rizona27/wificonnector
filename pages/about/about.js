@@ -7,7 +7,8 @@ Page({
             '#008080', '#DC143C', '#8B008B', '#BDB76B', '#FF8C00'
         ],
         lineColors: [],
-        currentTime: '',
+        currentDate: '', // 日期
+        currentTime: '', // 时间
         navBarHeight: 0,
         navBarTitleTop: 0,
     },
@@ -28,12 +29,10 @@ Page({
     },
 
     onShow: function() {
-        // 关键修改：只在页面显示时初始化一次随机颜色，不再使用定时器强制切换
         this.initializeRandomColors(); 
     },
     
     onHide: function() {
-        // 不再需要清除颜色定时器
     },
 
     initializeRandomColors: function() {
@@ -56,9 +55,15 @@ Page({
         const hours = String(date.getHours()).padStart(2, '0');
         const minutes = String(date.getMinutes()).padStart(2, '0');
         const seconds = String(date.getSeconds()).padStart(2, '0');
-        const timeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        
+        // 关键修改：生成独立的日期和时间字符串
+        const dateString = `${year}-${month}-${day}`;
+        const timeString = `${hours}:${minutes}:${seconds}`;
+
         this.setData({
-            currentTime: timeString
+            currentDate: dateString,
+            // 在时间字符串末尾添加两个非打印字符，以防止截断
+            currentTime: timeString + '\u00A0'
         });
     },
 

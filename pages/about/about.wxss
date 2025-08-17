@@ -1,8 +1,11 @@
 /* pages/about/about.wxss */
 .page-container {
     min-height: 100vh;
+    width: 100vw; /* 确保占据整个视口宽度 */
     position: relative;
     overflow: hidden;
+    margin: 0; /* 移除任何默认的外部边距 */
+    padding: 0; /* 移除任何默认的内部边距 */
 }
 
 .background-image {
@@ -43,18 +46,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* 增加顶部外边距，将文字部分向下推 */
     margin-top: 150px; 
-}
-
-/* 之前的内容样式保持不变，但要确保它们位于 .content-wrapper 内 */
-.content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100%;
-    padding-top: 0;
 }
 
 .text-container {
@@ -64,8 +56,8 @@
 }
 
 .moving-gradient {
-    background-size: 800% 800%; /* 扩大渐变背景尺寸，实现更平滑的流动 */
-    animation: gradientFlow 20s ease-in-out infinite; /* 绑定动画，20秒为一个循环，速度更慢更平滑 */
+    background-size: 800% 800%;
+    animation: gradientFlow 20s ease-in-out infinite;
 }
 
 @keyframes gradientFlow {
@@ -92,22 +84,27 @@
     margin-top: 5px;
 }
 
+/* 关键修正：将time-container改为flex布局 */
 .time-container {
     position: fixed;
     bottom: 10px;
     left: 0;
     right: 0;
     text-align: center;
+    /* 新增布局 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* 调整字体大小，使之更清晰 */
 .time-text {
-    font-size: 15px;
+    font-size: 16px; 
     font-weight: 100;
     font-style: italic;
-    color: #D8DBE0; /* 更白的颜色 */
+    color: #D8DBE0;
 }
 
-/* 新增：时间流逝特效 */
 .time-text-effect {
     animation: timeFade 3s ease-in-out infinite;
 }

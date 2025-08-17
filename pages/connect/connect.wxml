@@ -12,7 +12,14 @@
                     <text style="font-style: italic; color: #ffffff;">SSID：{{ssid}}</text>
                 </view>
             </view>
-            <button bindtap="connectWifi" class="ui-element">点击连接</button>
+            <button bindtap="connectWifi" class="ui-element {{isConnecting ? 'connecting' : ''}}">
+                <text wx:if="{{!isConnecting}}">{{buttonText}}</text>
+                <text wx:else>
+                    <text class="loading-dot">.</text>
+                    <text class="loading-dot">.</text>
+                    <text class="loading-dot">.</text>
+                </text>
+            </button>
         </view>
     </view>
 </view>

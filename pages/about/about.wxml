@@ -7,18 +7,18 @@
     
     <view class="content-wrapper">
        <view class="text-container moving-gradient" style="background-image: linear-gradient(to bottom right, {{lineColors[0]}}, {{lineColors[1]}}, {{lineColors[2]}}, {{lineColors[3]}}, {{lineColors[4]}}, {{lineColors[5]}}, {{lineColors[6]}}, {{lineColors[7]}}); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
-        <text class="text-line">微信扫一扫连Wifi的懒人工具</text>
+        <text class="text-line">微信扫一扫连Wifi的工具</text>
         <text class="text-line">希望方便到更多的朋友们；</text>
         <text class="text-line">感谢生命中所有的遇见。</text>
-        <text class="text-line">--rizona.cn@gmail.com</text>
-        <text class="text-line">Happiness Around The Corner...</text>
+        <text class="text-line">--By: rizona.cn@gmail.com</text>
+        <text class="text-line">Happiness around the corner...</text>
     </view>
     <view class="image-container">
         <image src="/images/c.gif" class="logo-image"></image>
         <image src="/images/r.gif" class="logo-image"></image>
     </view>
     <view class="time-container">
-        <text class="time-text">{{currentDate}}</text>
+        <text class="time-text time-text-effect">{{currentDate}}</text>
         <text class="time-text time-text-effect">{{currentTime}}</text>
     </view>
     </view>

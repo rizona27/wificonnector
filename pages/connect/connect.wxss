@@ -116,3 +116,44 @@ button:active {
     justify-content: flex-end; /* 底部对齐，以保留原有布局 */
     padding: 50px 20px; /* 恢复你原来的内边距 */
 }
+
+/* 新增：正在连接状态的按钮样式 */
+.connecting {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 新增：加载动画的点点样式 */
+.loading-dot {
+  opacity: 0;
+  animation: dot-breathe 1.4s infinite;
+  display: inline-block;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* 新增：点点呼吸动画 */
+@keyframes dot-breathe {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -5,28 +5,27 @@ Page({
      * 页面的初始数据
      */
     data: {
-      ssid: 'WiFi SSID',
+      ssid: 'WIFI SSID',
       bssid: '设备MAC',
       password: '密码',
-      navBarHeight: 0, // 新增：导航栏总高度
-      navBarTitleTop: 0 // 新增：标题距离顶部的距离
+      navBarHeight: 0,
+      navBarTitleTop: 0,
+      isConnecting: false,
+      buttonText: '点击连接'
     },
-  
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-      // 保留你原有的业务逻辑
-      let ssid = options.ssid;
-      let bssid = options.bssid;
-      let password = options.password;
-      this.setData({
-        ssid: ssid,
-        bssid: bssid,
-        password: password
-      })
+      if (options.ssid) {
+        this.setData({
+          ssid: options.ssid,
+          bssid: options.bssid || '',
+          password: options.password || ''
+        });
+      }
   
-      // 新增：导航栏高度计算逻辑
       const sysInfo = wx.getSystemInfoSync();
       const menuButton = wx.getMenuButtonBoundingClientRect();
       const navBarHeight = menuButton.top + menuButton.height + (menuButton.top - sysInfo.statusBarHeight);
@@ -43,8 +42,29 @@ Page({
      */
     connectWifi: function() {
       const that = this;
+      
+      // 关键修改1: 在调用前检查SSID是否为默认值
+      if (that.data.ssid === 'WIFI SSID') {
+        wx.showModal({
+          title: '配置错误',
+          content: '请联系作者，获取正确的小程序码。', // 使用content字段显示完整信息
+          showCancel: false, // 不显示取消按钮
+          confirmText: '确定'
+        });
+        return; // 终止函数执行
+      }
+
+      // 关键修改2: 更新按钮状态
+      that.setData({
+        isConnecting: true,
+        buttonText: '正在连接...'
+      });
+
+      // 正常连接逻辑
       wx.showToast({
         title: '请稍等...',
+        icon: 'loading',
+        duration: 20000 
       })
       that.startWiFi();
     },
@@ -55,7 +75,7 @@ Page({
     startWiFi: function() {
       const that = this;
       wx.startWifi({
-        complete: (res) => {
+        complete: () => {
           that.connected();
         },
       })
@@ -71,62 +91,34 @@ Page({
         BSSID: that.data.bssid,
         password: that.data.password,
         success: () => {
-          wx.showToast({
-            title: 'WiFi连接成功',
-          })
-          // 跳转至成功页面
+          that.setData({
+            isConnecting: false,
+            buttonText: '点击连接'
+          });
           wx.redirectTo({
             url: '/pages/success/success',
           })
         },
         fail: (res) => {
-          that.errorDialog(res);
+          that.setData({
+            isConnecting: false,
+            buttonText: '点击连接'
+          });
+
+          let content = '请检查网络或稍后再试。';
+          if (res.errMsg && res.errMsg.includes('fail to get user\'s approval')) {
+            content = '连接被用户取消。';
+          }
+          
+          // 关键修改：将失败提示也改为Modal，显示更详细的信息
+          wx.showModal({
+            title: '连接失败',
+            content: content,
+            showCancel: false,
+            confirmText: '确定'
+          });
         }
       })
-    },
-  
-    /**
-     * 连接失败弹窗
-     * @param {错误返回} res 
-     */
-    errorDialog: function(res) {
-      const that = this;
-      let content = res.errMsg; // 默认使用系统错误信息
-  
-      // 判断错误信息是否包含 'Undefined'，如果是则修改提示内容
-      if (res.errMsg.includes('Undefined')) {
-        content = '需要SSID和Password参数配置，请联系rizona.cn@mgail.com。';
-        wx.showModal({
-          title: '未能正确配置',
-          content: content,
-          showCancel: false, // 隐藏取消按钮
-          confirmText: '关闭', // 确认按钮文本改为“关闭”
-          success(res) {
-            if (res.confirm) {
-              console.log('用户点击了关闭');
-            }
-          }
-        });
-      } else {
-        // 如果不是参数错误，则显示带有复制密码功能的弹窗
-        wx.showModal({
-          title: '连接失败',
-          content: content,
-          confirmText: '复制密码',
-          success(res) {
-            if (res.confirm) {
-              that.copyPassword();
-            } else if (res.cancel) {
-              console.log('cancel')
-            }
-          },
-          fail(res) {
-            wx.showToast({
-              title: res.errMsg,
-            })
-          }
-        });
-      }
     },
   
     /**
@@ -146,52 +138,11 @@ Page({
       })
     },
   
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-  
-    },
-  
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-  
-    },
-  
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-  
-    },
-  
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-  
-    },
-  
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-  
-    },
-  
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-  
-    },
-  
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-  
-    }
-  })
+    onReady: function() { },
+    onShow: function() { },
+    onHide: function() { },
+    onUnload: function() { },
+    onPullDownRefresh: function() { },
+    onReachBottom: function() { },
+    onShareAppMessage: function() { }
+  });

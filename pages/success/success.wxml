@@ -1,5 +1,7 @@
-<!--pages/success/success.wxml-->
-<view>
-  <icon type="success" size="60"/>
-  <text size="20px">连接成功</text>
+<view class="page-container">
+  <image src="/images/bg1.jpg" mode="aspectFill" class="background-image"></image>
+  <view class="success-content">
+    <image src="/icons/succeed.png" class="success-icon" mode="widthFix" />
+    <text>连接成功</text>
+  </view>
 </view>

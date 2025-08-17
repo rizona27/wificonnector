@@ -7,13 +7,14 @@ Page({
             '#008080', '#DC143C', '#8B008B', '#BDB76B', '#FF8C00'
         ],
         lineColors: [],
-        currentDate: '', // 日期
-        currentTime: '', // 时间
+        currentDate: '', 
+        currentTime: '',
         navBarHeight: 0,
         navBarTitleTop: 0,
     },
 
     onLoad: function() {
+        // 关键修改：使用新的API获取系统信息
         const sysInfo = wx.getSystemInfoSync();
         const menuButton = wx.getMenuButtonBoundingClientRect();
         const navBarHeight = menuButton.top + menuButton.height + (menuButton.top - sysInfo.statusBarHeight);
@@ -56,14 +57,12 @@ Page({
         const minutes = String(date.getMinutes()).padStart(2, '0');
         const seconds = String(date.getSeconds()).padStart(2, '0');
         
-        // 关键修改：生成独立的日期和时间字符串
-        const dateString = `${year}-${month}-${day}`;
-        const timeString = `${hours}:${minutes}:${seconds}`;
+        const dateString = `${year}-${month}-${day}` + '\u00A0';
+        const timeString = `${hours}:${minutes}:${seconds}` + '\u00A0';
 
         this.setData({
             currentDate: dateString,
-            // 在时间字符串末尾添加两个非打印字符，以防止截断
-            currentTime: timeString + '\u00A0'
+            currentTime: timeString
         });
     },
 

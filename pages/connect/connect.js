@@ -15,7 +15,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
       // 保留你原有的业务逻辑
       let ssid = options.ssid;
       let bssid = options.bssid;
@@ -25,16 +25,16 @@ Page({
         bssid: bssid,
         password: password
       })
-      
+  
       // 新增：导航栏高度计算逻辑
       const sysInfo = wx.getSystemInfoSync();
       const menuButton = wx.getMenuButtonBoundingClientRect();
       const navBarHeight = menuButton.top + menuButton.height + (menuButton.top - sysInfo.statusBarHeight);
       const navBarTitleTop = sysInfo.statusBarHeight + (menuButton.top - sysInfo.statusBarHeight);
-      
+  
       this.setData({
-          navBarHeight: navBarHeight,
-          navBarTitleTop: navBarTitleTop
+        navBarHeight: navBarHeight,
+        navBarTitleTop: navBarTitleTop
       });
     },
   
@@ -48,7 +48,7 @@ Page({
       })
       that.startWiFi();
     },
-    
+  
     /**
      * 加载WiFi模块
      */
@@ -65,7 +65,7 @@ Page({
      * 连接WiFi
      */
     connected: function() {
-      const that = this; 
+      const that = this;
       wx.connectWifi({
         SSID: that.data.ssid,
         BSSID: that.data.bssid,
@@ -91,23 +91,42 @@ Page({
      */
     errorDialog: function(res) {
       const that = this;
-      wx.showModal({
-        title: '连接失败',
-        content: res.errMsg,
-        confirmText: '复制密码',
-        success (res) {
-          if (res.confirm) {
-            that.copyPassword();
-          } else if (res.cancel) {
-            console.log('cancel')
+      let content = res.errMsg; // 默认使用系统错误信息
+  
+      // 判断错误信息是否包含 'Undefined'，如果是则修改提示内容
+      if (res.errMsg.includes('Undefined')) {
+        content = '需要SSID和Password参数配置，请联系rizona.cn@mgail.com。';
+        wx.showModal({
+          title: '未能正确配置',
+          content: content,
+          showCancel: false, // 隐藏取消按钮
+          confirmText: '关闭', // 确认按钮文本改为“关闭”
+          success(res) {
+            if (res.confirm) {
+              console.log('用户点击了关闭');
+            }
           }
-        },
-        fail(res) {
-          wx.showToast({
-            title: res.errMsg,
-          })
-        }
-      });
+        });
+      } else {
+        // 如果不是参数错误，则显示带有复制密码功能的弹窗
+        wx.showModal({
+          title: '连接失败',
+          content: content,
+          confirmText: '复制密码',
+          success(res) {
+            if (res.confirm) {
+              that.copyPassword();
+            } else if (res.cancel) {
+              console.log('cancel')
+            }
+          },
+          fail(res) {
+            wx.showToast({
+              title: res.errMsg,
+            })
+          }
+        });
+      }
     },
   
     /**
@@ -117,9 +136,9 @@ Page({
       const that = this;
       wx.setClipboardData({
         data: that.data.password,
-        success (res) {
+        success(res) {
           wx.getClipboardData({
-            success (res) {
+            success(res) {
               console.log(res.data);
             }
           })
@@ -130,49 +149,49 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
   
     },
   
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
   
     },
   
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
   
     },
   
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
   
     },
   
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
   
     },
   
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
   
     },
   
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
   
     }
   })
